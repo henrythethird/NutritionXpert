@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center">{{ recipe.name }}</h1>
+
+    <dl>
+        <dt>Rating:</dt>
+        <dd>{{ recipe.rating }}</dd>
+    </dl>
+
+    <h2>Ingredients</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ingredient in recipe.recipeIngredients %}
+            <tr>
+                <td>{{ ingredient.ingredient.id }}</td>
+                <td>{{ ingredient.ingredient.name }}</td>
+                <td>{{ ingredient.amount }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

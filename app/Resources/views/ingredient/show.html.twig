@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center">Ingredient - {{ ingredient.name }}</h1>
+    <dl>
+        <dt>Calories:</dt>
+        <dd>{{ ingredient.calories }}</dd>
+        <dt>Carbs:</dt>
+        <dd>{{ ingredient.carbs }}</dd>
+        <dt>Fat:</dt>
+        <dd>{{ ingredient.fat }}</dd>
+        <dt>Protein:</dt>
+        <dd>{{ ingredient.protein }}</dd>
+        <dt>Alcohol:</dt>
+        <dd>{{ ingredient.alcohol }}</dd>
+    </dl>
+
+{% endblock %}

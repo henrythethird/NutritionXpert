@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center">Ingredients</h1>
+    <p>Search your food items:</p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Ingredient Name</th>
+                <th>Calories</th>
+                <th>Fat</th>
+                <th>Carbs</th>
+                <th>Protein</th>
+                <th>Alcohol</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ingredient in ingredients %}
+            <tr>
+                <td>{{ ingredient.id }}</td>
+                <td><a href="{{ path('ingredient_show', {'ingredientName': ingredient.name}) }}">{{ ingredient.name }}</a></td>
+                <td>{{ ingredient.calories }}</td>
+                <td>{{ ingredient.fat }}</td>
+                <td>{{ ingredient.carbs }}</td>
+                <td>{{ ingredient.protein }}</td>
+                <td>{{ ingredient.alcohol }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
