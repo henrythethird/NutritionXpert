@@ -19,7 +19,7 @@
             {% for ingredient in ingredients %}
             <tr>
                 <td>{{ ingredient.id }}</td>
-                <td><a href="{{ path('ingredient_show', {'ingredientName': ingredient.name}) }}">{{ ingredient.name }}</a></td>
+                <td><a href="{{ path('ingredient_show', {'name': ingredient.name}) }}">{{ ingredient.name }}</a></td>
                 <td>{{ ingredient.calories }}</td>
                 <td>{{ ingredient.fat }}</td>
                 <td>{{ ingredient.carbs }}</td>

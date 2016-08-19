@@ -6,7 +6,6 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>#</th>
                 <th>Name</th>
                 <th>Rating</th>
             </tr>
@@ -14,8 +13,7 @@
         <tbody>
             {% for recipe in recipes %}
             <tr>
-                <td>{{ recipe.id }}</td>
-                <td><a href="{{ path('recipe_show', { 'recipeName': recipe.name }) }}">{{ recipe.name }}</a></td>
+                <td><a href="{{ path('recipe_show', { 'name': recipe.name }) }}">{{ recipe.name }}</a></td>
                 <td>{{ recipe.rating }}</td>
             </tr>
             {% endfor %}

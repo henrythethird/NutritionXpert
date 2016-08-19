@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Ingredient;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -9,6 +11,7 @@ class IngredientController extends Controller
 {
     /**
      * @Route("/ingredient", name="ingredient_list")
+     * @Method("GET")
      */
     public function listAction() {
         $em = $this->getDoctrine()->getManager();
@@ -20,17 +23,13 @@ class IngredientController extends Controller
     }
 
     /**
-     * @Route("/ingredient/{ingredientName}", name="ingredient_show")
+     * @Route("/ingredient/{name}", name="ingredient_show")
+     * @Method("GET")
      */
-    public function showAction($ingredientName) {
-        $em = $this->getDoctrine()->getManager();
-        $ingredient = $em->getRepository("AppBundle:Ingredient")->findOneBy([
-            'name' => $ingredientName
-        ]);
-
+    public function showAction(Ingredient $ingredient) {
         return $this->render('ingredient/show.html.twig', [
            'ingredient' => $ingredient,
-            'name' => $ingredientName
+            'name' => $ingredient->getName()
         ]);
     }
 

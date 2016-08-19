@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Recipe;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -22,16 +24,11 @@ class RecipeController extends Controller
     }
 
     /**
-     * @Route("/recipe/{recipeName}", name="recipe_show")
+     * @Route("/recipe/{name}", name="recipe_show")
+     * @Method("GET")
      */
-    public function showAction($recipeName) {
-        $em = $this->getDoctrine()->getManager();
-        $recipe = $em->getRepository("AppBundle:Recipe")
-            ->findOneBy([
-                'name' => $recipeName
-            ]);
-
-        return $this->render('recipe/show.html.twig', [
+    public function showAction(Recipe $recipe) {
+                return $this->render('recipe/show.html.twig', [
             'recipe' => $recipe
         ]);
     }

@@ -22,7 +22,7 @@ class Recipe
      */
     private $name;
     /**
-     * @Mapping\Column(type="smallint")
+     * @Mapping\Column(type="smallint", unique=true)
      */
     private $rating;
 

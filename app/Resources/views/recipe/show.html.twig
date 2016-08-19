@@ -13,17 +13,15 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>#</th>
                 <th>Name</th>
                 <th>Amount</th>
             </tr>
         </thead>
         <tbody>
-            {% for ingredient in recipe.recipeIngredients %}
+            {% for recipeIngredient in recipe.recipeIngredients %}
             <tr>
-                <td>{{ ingredient.ingredient.id }}</td>
-                <td>{{ ingredient.ingredient.name }}</td>
-                <td>{{ ingredient.amount }}</td>
+                <td><a href="{{ path('ingredient_show', {'name': recipeIngredient.ingredient.name}) }}">{{ recipeIngredient.ingredient.name }}</a></td>
+                <td>{{ recipeIngredient.amount }}</td>
             </tr>
             {% endfor %}
         </tbody>
