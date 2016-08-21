@@ -37,7 +37,7 @@ class RecipeIngredient
     }
 
     /**
-     * @return mixed
+     * @return Ingredient
      */
     public function getIngredient()
     {

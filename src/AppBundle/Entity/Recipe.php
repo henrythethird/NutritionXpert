@@ -72,7 +72,7 @@ class Recipe
     }
 
     /**
-     * @return []RecipeIngredient
+     * @return array RecipeIngredient
      */
     public function getRecipeIngredients()
     {

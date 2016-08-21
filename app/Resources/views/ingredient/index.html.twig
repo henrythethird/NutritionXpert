@@ -2,31 +2,69 @@
 
 {% block body %}
     <h1 class="text-center">Ingredients</h1>
-    <p>Search your food items:</p>
+    <p>
+        Search your food items:
+        <select id="js-search-ingredients" class="form-control"></select>
+    </p>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>#</th>
                 <th>Ingredient Name</th>
-                <th>Calories</th>
-                <th>Fat</th>
-                <th>Carbs</th>
-                <th>Protein</th>
-                <th>Alcohol</th>
+                <th class="text-right">Calories</th>
+                <th class="text-right">Fat</th>
+                <th class="text-right">Carbs</th>
+                <th class="text-right">Protein</th>
+                <th class="text-right">Alcohol</th>
             </tr>
         </thead>
         <tbody>
             {% for ingredient in ingredients %}
             <tr>
-                <td>{{ ingredient.id }}</td>
                 <td><a href="{{ path('ingredient_show', {'name': ingredient.name}) }}">{{ ingredient.name }}</a></td>
-                <td>{{ ingredient.calories }}</td>
-                <td>{{ ingredient.fat }}</td>
-                <td>{{ ingredient.carbs }}</td>
-                <td>{{ ingredient.protein }}</td>
-                <td>{{ ingredient.alcohol }}</td>
+                <td class="text-right">{{ ingredient.calories }}kcal</td>
+                <td class="text-right">{{ ingredient.fat }}g</td>
+                <td class="text-right">{{ ingredient.carbs }}g</td>
+                <td class="text-right">{{ ingredient.protein }}g</td>
+                <td class="text-right">{{ ingredient.alcohol }}g</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <script type="text/javascript">
+        $(function() {
+            $('#js-search-ingredients').select2({
+                ajax: {
+                    url: '{{ path('ingredient_search') }}',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            q: params.term,
+                            page: params.page
+                        }
+                    },
+                    processResults: function(data, params) {
+                        return data;
+                    },
+                },
+                escapeMarkup: function(markup) { return markup; },
+                minimumInputLength: 1,
+                templateResult: function(res) {
+                    if (res.loading) return res.text;
+                    var markup = '<div><div>' + res.name + '</div>';
+                    markup += '<table><th>Calories: </th><td>' + res.calories + 'kcal</td>';
+                    markup += '<tr><th>Carbs: </th><td>' + res.carbs + 'g</td></tr>';
+                    markup += '<tr><th>Fat: </th><td>' + res.fat + 'g</td></tr>';
+                    markup += '<tr><th>Protein: </th><td>' + res.protein + 'g</td></tr>';
+                    markup += '<tr><th>Alcohol: </th><td>' + res.alcohol + 'g</td></tr>';
+                    markup += '</table></div>';
+                    return markup;
+                },
+                templateSelection: function(res) {
+                    return res.name;
+                }
+            });
+        });
+    </script>
 {% endblock %}

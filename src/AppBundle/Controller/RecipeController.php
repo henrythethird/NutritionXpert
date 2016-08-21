@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Recipe;
+use AppBundle\Util\RecipeUtil;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,8 +29,10 @@ class RecipeController extends Controller
      * @Method("GET")
      */
     public function showAction(Recipe $recipe) {
-                return $this->render('recipe/show.html.twig', [
-            'recipe' => $recipe
+        $recipeUtil = new RecipeUtil($recipe);
+        return $this->render('recipe/show.html.twig', [
+            'recipe' => $recipe,
+            'sum' => $recipeUtil->summarizeIngredients()
         ]);
     }
 }

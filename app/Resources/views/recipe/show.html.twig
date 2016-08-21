@@ -14,17 +14,35 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Amount</th>
+                <th class="text-right">Amount</th>
+                <th class="text-right">Calories</th>
+                <th class="text-right">Carbs</th>
+                <th class="text-right">Fat</th>
+                <th class="text-right">Protein</th>
             </tr>
         </thead>
         <tbody>
             {% for recipeIngredient in recipe.recipeIngredients %}
             <tr>
                 <td><a href="{{ path('ingredient_show', {'name': recipeIngredient.ingredient.name}) }}">{{ recipeIngredient.ingredient.name }}</a></td>
-                <td>{{ recipeIngredient.amount }}</td>
+                <td class="text-right">{{ recipeIngredient.amount }}</td>
+                <td class="text-right">{{ recipeIngredient.ingredient.calories }}</td>
+                <td class="text-right">{{ recipeIngredient.ingredient.carbs }}</td>
+                <td class="text-right">{{ recipeIngredient.ingredient.fat }}</td>
+                <td class="text-right">{{ recipeIngredient.ingredient.protein }}</td>
             </tr>
             {% endfor %}
         </tbody>
+        <tfoot>
+            <tr>
+                <th>Total</th>
+                <th></th>
+                <th class="text-right">{{ sum.calories }}</th>
+                <th class="text-right">{{ sum.carbs }}</th>
+                <th class="text-right">{{ sum.fat }}</th>
+                <th class="text-right">{{ sum.protein }}</th>
+            </tr>
+        </tfoot>
     </table>
 
 {% endblock %}
