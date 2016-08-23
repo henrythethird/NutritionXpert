@@ -1,18 +1,60 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <style>
+        table.nutrition_table {
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        table.nutrition_table tr {
+            border: 1px solid black;
+        }
+
+        table.nutrition_table td, table.nutrition_table th {
+            padding: 0px 10px;
+        }
+
+        table.nutrition_table tr.separator {
+            height: 4px;
+            background-color: black;
+        }
+
+    </style>
+
     <h1 class="text-center">Ingredient - {{ ingredient.name }}</h1>
-    <dl>
-        <dt>Calories:</dt>
-        <dd>{{ ingredient.calories }}</dd>
-        <dt>Carbs:</dt>
-        <dd>{{ ingredient.carbs }}</dd>
-        <dt>Fat:</dt>
-        <dd>{{ ingredient.fat }}</dd>
-        <dt>Protein:</dt>
-        <dd>{{ ingredient.protein }}</dd>
-        <dt>Alcohol:</dt>
-        <dd>{{ ingredient.alcohol }}</dd>
-    </dl>
+
+    <table class="nutrition_table" >
+        <tbody>
+            <tr>
+                <td colspan="2"><h4>Nutrition Facts</h4></td>
+            </tr>
+            <tr class="separator"><td colspan="2"></td></tr>
+            <tr class="separator"><td colspan="2"></td></tr>
+            <tr>
+                <td colspan="2"><strong>Amount per 100g</strong></td>
+            </tr>
+            <tr class="separator"><td colspan="2"></td></tr>
+            <tr>
+                <td colspan="2"><strong>Calories: </strong> {{ ingredient.calories }}kcal</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="text-right">% Daily Value</td>
+            </tr>
+            <tr>
+                <td><strong>Total Fat: </strong>{{ ingredient.fat }}g</td>
+                <th class="text-right">2%</th>
+            </tr>
+            <tr>
+                <td><strong>Carbohydrate: </strong>{{ ingredient.carbs }}g</td>
+                <th class="text-right">4%</th>
+            </tr>
+            <tr>
+                <td><strong>Protein: </strong>{{ ingredient.protein }}g</td>
+                <th class="text-right">2%</th>
+            </tr>
+        </tbody>
+    </table>
 
 {% endblock %}

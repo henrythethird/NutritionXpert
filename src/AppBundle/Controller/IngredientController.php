@@ -3,9 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Ingredient;
+use AppBundle\Form\IngredientForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IngredientController extends Controller
@@ -20,6 +22,31 @@ class IngredientController extends Controller
 
         return $this->render('ingredient/index.html.twig', [
             'ingredients' => $ingredients
+        ]);
+    }
+
+    /**
+     * @Route("/ingredient/new", name="ingredient_new")
+     */
+    public function newAction(Request $request)
+    {
+        $form = $this->createForm(IngredientForm::class);
+
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $ingredient = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($ingredient);
+            $em->flush();
+
+            $this->addFlash('success', 'Ingredient added');
+
+            return $this->redirectToRoute('ingredient_list');
+        }
+
+        return $this->render('ingredient/add.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 

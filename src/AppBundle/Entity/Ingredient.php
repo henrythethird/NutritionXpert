@@ -31,34 +31,7 @@ class Ingredient {
 	 * @Mapping\Column(type="decimal", precision=5, scale=2)
      */
     private $carbs;
-	/**
-	 * @Mapping\Column(type="decimal", precision=5, scale=2)
-     */
-    private $starch;
-	/**
-	 * @Mapping\Column(type="decimal", precision=5, scale=2)
-     */
-    private $sugars;
-	/**
-	 * @Mapping\Column(type="decimal", precision=5, scale=2)
-     */
-    private $fibers;
-	/**
-	 * @Mapping\Column(type="decimal", precision=5, scale=2)
-     */
-    private $cholesterol;
-	/**
-	 * @Mapping\Column(type="decimal", precision=5, scale=2)
-     */
-    private $fatty_acids_mono;
-	/**
-	 * @Mapping\Column(type="decimal", precision=5, scale=2)
-     */
-    private $fatty_acids_sat;
-	/**
-	 * @Mapping\Column(type="decimal", precision=5, scale=2)
-     */
-    private $fatty_acids_poly;
+
 	/**
 	 * @Mapping\Column(type="decimal", precision=5, scale=2)
      */
@@ -151,7 +124,7 @@ class Ingredient {
 	/**
 	 * @param mixed $alcohol
 	 */
-	public function setAlcohol($alcohol)
+	public function setAlcohol($alcohol = 0)
 	{
 		$this->alcohol = $alcohol;
 	}
