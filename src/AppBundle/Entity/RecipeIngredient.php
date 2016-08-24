@@ -12,12 +12,16 @@ class RecipeIngredient
 {
     /**
      * @ORM\Id()
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+    /**
      * @ORM\ManyToOne(targetEntity="Recipe", inversedBy="recipeIngredients")
      * @ORM\JoinColumn(name="recipe_id", referencedColumnName="id", nullable=false)
      */
     private $recipe;
     /**
-     * @ORM\Id()
      * @ORM\ManyToOne(targetEntity="Ingredient")
      * @ORM\JoinColumn(name="ingredient_id", referencedColumnName="id", nullable=false)
      */

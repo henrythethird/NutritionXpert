@@ -20,6 +20,7 @@ class RecipeForm extends AbstractType
                 'entry_type' => RecipeIngredientForm::class,
                 'allow_add' => true,
                 'allow_delete' => true,
+                'by_reference' => false
             ]);
         ;
     }

@@ -28,7 +28,7 @@ class Recipe
     private $rating;
 
     /**
-     * @Mapping\OneToMany(targetEntity="RecipeIngredient", mappedBy="recipe")
+     * @Mapping\OneToMany(targetEntity="RecipeIngredient", mappedBy="recipe", cascade={"persist"})
      */
     private $recipeIngredients;
 
@@ -88,12 +88,14 @@ class Recipe
     /**
      * @param RecipeIngredient $recipeIngredient
      */
-    public function addIngredient(RecipeIngredient $recipeIngredient)
+    public function addRecipeIngredient(RecipeIngredient $recipeIngredient)
     {
+        $recipeIngredient->setRecipe($this);
+
         $this->recipeIngredients->add($recipeIngredient);
     }
 
-    public function removeIngredient(RecipeIngredient $recipeIngredient)
+    public function removeRecipeIngredient(RecipeIngredient $recipeIngredient)
     {
         $this->recipeIngredients->removeElement($recipeIngredient);
     }

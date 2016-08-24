@@ -32,8 +32,12 @@
                 <td class="text-right">{{ ingredient.protein }}g</td>
                 <td class="text-right">{{ ingredient.alcohol }}g</td>
                 <td class="text-right">
-                    <a class="btn btn-primary" href="{{ path('ingredient_edit', {'name': ingredient.name}) }}">Edit</a>
-                    <a class="btn btn-danger" href="{{ path('ingredient_delete', {'name': ingredient.name}) }}">Delete</a>
+                    <a class="btn btn-primary" href="{{ path('ingredient_edit', {'name': ingredient.name}) }}">
+                        <span class="glyphicon glyphicon-edit"></span> Edit
+                    </a>
+                    <a class="btn btn-danger" href="{{ path('ingredient_delete', {'name': ingredient.name}) }}">
+                        <span class="glyphicon glyphicon-remove"></span> Delete
+                    </a>
                 </td>
             </tr>
             {% endfor %}

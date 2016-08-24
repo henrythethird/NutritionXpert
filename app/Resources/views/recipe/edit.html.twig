@@ -22,7 +22,7 @@
         {% endfor %}
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <a onClick="alert('not implemented');" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add new Ingredient</a>
+                    <a onClick="addTagForm($('#js-holder'), $(this));" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add new Ingredient</a>
                 </div>
             </div>
     </div>
@@ -30,4 +30,14 @@
     <button type="submit" class="btn btn-primary" formnovalidate>Save Changes</button>
     <a class="btn btn-default" href="{{ path('recipe_list') }}">Cancel</a>
     {{ form_end(form) }}
+
+    <script>
+        function addTagForm($collectionHolder, $addRow) {
+            var index = $collectionHolder.find(".row").length;
+            var prototype = $collectionHolder.data('prototype');
+            var newForm = prototype.replace(/__name__/g, index);
+            var $newRow = $("<div class='row'></div>").append(newForm);
+            $addRow.before($newRow);
+        }
+    </script>
 {% endblock %}
