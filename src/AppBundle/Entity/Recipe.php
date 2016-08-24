@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Doctrine\ORM\Mapping\Entity
@@ -31,8 +32,13 @@ class Recipe
      */
     private $recipeIngredients;
 
+    public function __construct()
+    {
+        $this->recipeIngredients = new ArrayCollection();
+    }
+
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -40,7 +46,7 @@ class Recipe
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -80,10 +86,15 @@ class Recipe
     }
 
     /**
-     * @param mixed $ingredients
+     * @param RecipeIngredient $recipeIngredient
      */
-    public function setRecipeIngredients($ingredients)
+    public function addIngredient(RecipeIngredient $recipeIngredient)
     {
-        $this->recipeIngredients = $ingredients;
+        $this->recipeIngredients->add($recipeIngredient);
+    }
+
+    public function removeIngredient(RecipeIngredient $recipeIngredient)
+    {
+        $this->recipeIngredients->removeElement($recipeIngredient);
     }
 }

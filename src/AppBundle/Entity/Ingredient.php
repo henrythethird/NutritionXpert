@@ -42,7 +42,7 @@ class Ingredient {
     private $alcohol;
 
 	/**
-	 * @return mixed
+	 * @return int
 	 */
 	public function getId()
 	{
@@ -50,7 +50,7 @@ class Ingredient {
 	}
 
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function getName()
 	{
@@ -58,7 +58,7 @@ class Ingredient {
 	}
 
 	/**
-	 * @param mixed $name
+	 * @param string $name
 	 */
 	public function setName($name)
 	{
@@ -143,5 +143,11 @@ class Ingredient {
 	public function setCalories($calories)
 	{
 		$this->calories = $calories;
+	}
+
+
+	public function __toString()
+	{
+		return $this->getName();
 	}
 }

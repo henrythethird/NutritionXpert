@@ -45,6 +45,22 @@ class RecipeIngredient
     }
 
     /**
+     * @param mixed $recipe
+     */
+    public function setRecipe($recipe)
+    {
+        $this->recipe = $recipe;
+    }
+
+    /**
+     * @param mixed $ingredient
+     */
+    public function setIngredient($ingredient)
+    {
+        $this->ingredient = $ingredient;
+    }
+
+    /**
      * @return mixed
      */
     public function getAmount()
@@ -58,5 +74,10 @@ class RecipeIngredient
     public function setAmount($amount)
     {
         $this->amount = $amount;
+    }
+
+    public function __toString()
+    {
+        return $this->getAmount()." ".$this->getIngredient()->getName();
     }
 }

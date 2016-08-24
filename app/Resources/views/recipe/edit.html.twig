@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Edit Recipe</h2>
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.rating) }}
+
+    <h3>Ingredients</h3>
+    <div id="js-holder" class="container" data-prototype="{{ form_widget(form.recipeIngredients.vars.prototype)|e('html_attr') }}">
+        {% for recipeIngredient in form.recipeIngredients %}
+            <div class="row">
+                <div class="col-md-4">{{ form_row(recipeIngredient.amount) }}</div>
+                <div class="col-md-6">{{ form_row(recipeIngredient.ingredient) }}</div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">&nbsp;</label>
+                        <a onClick="$(this).closest('div.row').remove();" class="form-control btn btn-danger">Remove</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a onClick="alert('not implemented');" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add new Ingredient</a>
+                </div>
+            </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" formnovalidate>Save Changes</button>
+    <a class="btn btn-default" href="{{ path('recipe_list') }}">Cancel</a>
+    {{ form_end(form) }}
+{% endblock %}

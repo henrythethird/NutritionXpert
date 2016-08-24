@@ -8,6 +8,11 @@
             <tr>
                 <th>Name</th>
                 <th class="text-right">Rating</th>
+                <th class="col-md-2 text-right">
+                    <a class="btn btn-success" href="{{ path('recipe_new') }}">
+                        <span class="glyphicon glyphicon-plus"></span> Add New Recipe
+                    </a>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -15,6 +20,10 @@
             <tr>
                 <td><a href="{{ path('recipe_show', { 'name': recipe.name }) }}">{{ recipe.name }}</a></td>
                 <td class="text-right">{{ recipe.rating }}</td>
+                <td class="text-right">
+                    <a class="btn btn-primary" href="{{ path('recipe_edit', {'name': recipe.name}) }}">Edit</a>
+                    <a class="btn btn-danger" href="{{ path('recipe_delete', {'name': recipe.name}) }}">Delete</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
