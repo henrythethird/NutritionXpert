@@ -2,7 +2,8 @@
 
 {% block body %}
     <h1 class="text-center">{{ recipe.name }}</h1>
-
+    <a class="btn btn-default" href="{{ path('recipe_list') }}">To the List</a>
+    <br /><br />
     <dl>
         <dt>Rating:</dt>
         <dd>{{ recipe.rating }}</dd>
