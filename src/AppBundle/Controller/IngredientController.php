@@ -26,6 +26,45 @@ class IngredientController extends Controller
     }
 
     /**
+     * @Route("/ingredient/edit/{name}", name="ingredient_edit")
+     */
+    public function editAction(Request $request, Ingredient $ingredient)
+    {
+        $form = $this->createForm(IngredientForm::class, $ingredient);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $ingredient = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($ingredient);
+            $em->flush();
+
+            $this->addFlash('success', 'Ingredient updated');
+
+            return $this->redirectToRoute('ingredient_list');
+        }
+
+        return $this->render('ingredient/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/ingredient/delete/{name}", name="ingredient_delete")
+     */
+    public function deleteAction(Ingredient $ingredient)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($ingredient);
+        $em->flush();
+
+        $this->addFlash('success', 'Ingredient removed');
+        return $this->redirectToRoute('ingredient_list');
+    }
+
+    /**
      * @Route("/ingredient/new", name="ingredient_new")
      */
     public function newAction(Request $request)

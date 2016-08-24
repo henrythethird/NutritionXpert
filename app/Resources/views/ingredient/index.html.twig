@@ -15,6 +15,7 @@
                 <th class="text-right">Carbs</th>
                 <th class="text-right">Protein</th>
                 <th class="text-right">Alcohol</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +27,10 @@
                 <td class="text-right">{{ ingredient.carbs }}g</td>
                 <td class="text-right">{{ ingredient.protein }}g</td>
                 <td class="text-right">{{ ingredient.alcohol }}g</td>
+                <td class="text-right">
+                    <a class="btn btn-primary" href="{{ path('ingredient_edit', {'name': ingredient.name}) }}">Edit</a>
+                    <a class="btn btn-danger" href="{{ path('ingredient_delete', {'name': ingredient.name}) }}">Delete</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
