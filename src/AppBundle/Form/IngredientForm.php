@@ -2,7 +2,6 @@
 
 namespace AppBundle\Form;
 
-use Proxies\__CG__\AppBundle\Entity\Ingredient;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,19 +13,19 @@ class IngredientForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('calories')
-            ->add('fat')
-            ->add('carbs')
-            ->add('protein')
-            ->add('alcohol')
+            ->add('name', TextType::class)
+            ->add('calories', NumberType::class)
+            ->add('fat', NumberType::class)
+            ->add('carbs', NumberType::class)
+            ->add('protein', NumberType::class)
+            ->add('alcohol', NumberType::class)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\Ingredient'
+            'data_class' => 'AppBundle\Entity\Ingredient',
         ]);
     }
 }
