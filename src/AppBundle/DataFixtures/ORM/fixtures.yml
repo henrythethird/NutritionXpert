@@ -6,13 +6,6 @@ AppBundle\Entity\Ingredient:
     protein: <numberBetween(0,100)>
     fat: <numberBetween(0,100)>
     alcohol: <numberBetween(0,100>
-    starch: <numberBetween(0,100)>
-    sugars: <numberBetween(0,100)>
-    fibers: <numberBetween(0,100)>
-    cholesterol: <numberBetween(0,100)>
-    fatty_acids_mono: <numberBetween(0,100)>
-    fatty_acids_sat: <numberBetween(0,100)>
-    fatty_acids_poly: <numberBetween(0,100)>
 AppBundle\Entity\Recipe:
   recipe_{1..10}:
     name: <name()>
