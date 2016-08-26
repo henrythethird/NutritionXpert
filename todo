@@ -1,2 +1,8 @@
 Readme mit Business-Sicht ergaenzen
+Return types ergaenzen (-> todo php7)
+PHP7 changes (type hinting) + Array (efficiency)
+OK - Symfony Syntax (Repo:class) -> Repo::class
+OK - @Template('template.html.twig') und dann nur noch zus variablen als Return
+OK - Unique constraint -> mysql + form constraint
+OK - currentRequest als parameter
 

@@ -20,7 +20,7 @@ class RecipeIngredientForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\RecipeIngredient',
+            'data_class' => RecipeIngredient::class,
         ]);
     }
 

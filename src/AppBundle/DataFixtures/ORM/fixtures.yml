@@ -10,3 +10,8 @@ AppBundle\Entity\Recipe:
   recipe_{1..10}:
     name: <name()>
     rating: <numberBetween(1,100)>
+AppBundle\Entity\RecipeIngredient:
+  recipeIngredient_{1..40}:
+    amount: <numberBetween(1,10)>
+    recipe: '@recipe_*'
+    ingredient: '@ingredient_*'

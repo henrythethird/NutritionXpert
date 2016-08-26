@@ -2,10 +2,13 @@
 
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @Mapping\Entity(repositoryClass="AppBundle\Repository\IngredientRepository")
- * @Mapping\Table(name="ingredient")
+ * @Mapping\Table()
+ * @UniqueEntity("name")
  */
 class Ingredient {
 	/**
@@ -16,30 +19,42 @@ class Ingredient {
 	private $id;
 
 	/**
-	 * @Mapping\Column(type="string")
+	 * @Mapping\Column(type="string", unique=true)
+	 * @Assert\NotBlank()
 	 */
 	private $name;
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
+	 * @Assert\GreaterThanOrEqual(0)
      */
-    private $calories;
+    private $calories = 0;
 	/**
 	 * @Mapping\Column(type="decimal", precision=5, scale=2)
+	 * @Assert\GreaterThanOrEqual(0)
      */
-    private $fat;
+    private $fat = 0;
 	/**
 	 * @Mapping\Column(type="decimal", precision=5, scale=2)
+	 * @Assert\GreaterThanOrEqual(0)
      */
-    private $carbs;
+    private $carbs = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=5, scale=2)
+	 * @Assert\GreaterThanOrEqual(0)
      */
-    private $protein;
+    private $protein = 0;
 	/**
 	 * @Mapping\Column(type="decimal", precision=5, scale=2)
+	 * @Assert\GreaterThanOrEqual(0)
      */
-    private $alcohol;
+    private $alcohol = 0;
+
+	/**
+	 * @Mapping\OneToMany(targetEntity="RecipeIngredient", mappedBy="ingredient", cascade={"persist"})
+	 * @Mapping\JoinColumn(onDelete="CASCADE")
+	 */
+	private $recipeIngredients;
 
 	/**
 	 * @return int

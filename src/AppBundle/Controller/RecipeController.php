@@ -7,6 +7,7 @@ use AppBundle\Form\IngredientForm;
 use AppBundle\Form\RecipeForm;
 use AppBundle\Util\RecipeUtil;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,29 +16,31 @@ class RecipeController extends Controller
 {
     /**
      * @Route("/recipe", name="recipe_list")
+     * @Template("recipe/index.html.twig")
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $recipes = $em->getRepository("AppBundle:Recipe")
+        $recipes = $em->getRepository(Recipe::class)
             ->findAll();
 
-        return $this->render('recipe/index.html.twig', [
+        return [
             'recipes' => $recipes
-        ]);
+        ];
     }
 
     /**
      * @Route("/recipe/details/{name}", name="recipe_show")
+     * @Template("recipe/show.html.twig")
      * @Method("GET")
      */
     public function showAction(Recipe $recipe)
     {
         $recipeUtil = new RecipeUtil($recipe);
-        return $this->render('recipe/show.html.twig', [
+        return [
             'recipe' => $recipe,
             'sum' => $recipeUtil->summarizeIngredients()
-        ]);
+        ];
     }
 
     /**
@@ -55,6 +58,7 @@ class RecipeController extends Controller
 
     /**
      * @Route("/recipe/new", name="recipe_new")
+     * @Template("recipe/add.html.twig")
      */
     public function newAction(Request $request)
     {
@@ -73,13 +77,14 @@ class RecipeController extends Controller
             return $this->redirectToRoute('recipe_list');
         }
 
-        return $this->render('recipe/add.html.twig', [
+        return [
             'form' => $form->createView()
-        ]);
+        ];
     }
 
     /**
      * @Route("/recipe/edit/{name}", name="recipe_edit")
+     * @Template("recipe/edit.html.twig")
      */
     public function editAction(Request $request, Recipe $recipe)
     {
@@ -98,8 +103,8 @@ class RecipeController extends Controller
             return $this->redirectToRoute('recipe_list');
         }
 
-        return $this->render('recipe/edit.html.twig', [
+        return [
             'form' => $form->createView()
-        ]);
+        ];
     }
 }

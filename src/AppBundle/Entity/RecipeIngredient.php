@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @Doctrine\ORM\Mapping\Entity
- * @Doctrine\ORM\Mapping\Table(name="recipe_ingredient")
+ * @Doctrine\ORM\Mapping\Table()
  */
 class RecipeIngredient
 {

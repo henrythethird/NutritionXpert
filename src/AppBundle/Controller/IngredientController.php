@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Ingredient;
 use AppBundle\Form\IngredientForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,19 +15,21 @@ class IngredientController extends Controller
 {
     /**
      * @Route("/ingredient", name="ingredient_list")
+     * @Template("ingredient/index.html.twig")
      */
     public function listAction() {
         $ingredients = $this->getDoctrine()
-            ->getRepository("AppBundle:Ingredient")
+            ->getRepository(Ingredient::class)
             ->findAll();
 
-        return $this->render('ingredient/index.html.twig', [
+        return [
             'ingredients' => $ingredients
-        ]);
+        ];
     }
 
     /**
      * @Route("/ingredient/edit/{name}", name="ingredient_edit")
+     * @Template("ingredient/edit.html.twig")
      */
     public function editAction(Request $request, Ingredient $ingredient)
     {
@@ -46,9 +49,9 @@ class IngredientController extends Controller
             return $this->redirectToRoute('ingredient_list');
         }
 
-        return $this->render('ingredient/edit.html.twig', [
+        return [
             'form' => $form->createView()
-        ]);
+        ];
     }
 
     /**
@@ -66,6 +69,7 @@ class IngredientController extends Controller
 
     /**
      * @Route("/ingredient/new", name="ingredient_new")
+     * @Template("ingredient/add.html.twig")
      */
     public function newAction(Request $request)
     {
@@ -84,32 +88,31 @@ class IngredientController extends Controller
             return $this->redirectToRoute('ingredient_list');
         }
 
-        return $this->render('ingredient/add.html.twig', [
+        return [
             'form' => $form->createView()
-        ]);
+        ];
     }
 
     /**
      * @Route("/ingredient/details/{name}", name="ingredient_show")
+     * @Template("ingredient/show.html.twig")
      */
     public function showAction(Ingredient $ingredient) {
-        return $this->render('ingredient/show.html.twig', [
+        return [
            'ingredient' => $ingredient,
             'name' => $ingredient->getName()
-        ]);
+        ];
     }
 
     /**
      * @Route("/ingredient/search", name="ingredient_search")
      * @Method("GET")
      */
-    public function searchAction() {
-        $ingredientName = $this->get('request_stack')
-            ->getCurrentRequest()
-            ->get('q');
+    public function searchAction(Request $request) {
+        $ingredientName = $request->get('q');
 
         $ingredients = $this->getDoctrine()
-            ->getRepository("AppBundle:Ingredient")
+            ->getRepository(Ingredient::class)
             ->byNameContains($ingredientName);
 
         return new JsonResponse([
