@@ -1,10 +1,11 @@
 <?php
 
 namespace AppBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @Doctrine\ORM\Mapping\Entity
+ * @Doctrine\ORM\Mapping\Entity(repositoryClass="AppBundle\Repository\PlanDayRepository")
  * @Doctrine\ORM\Mapping\Table()
  */
 class PlanDay
@@ -25,6 +26,11 @@ class PlanDay
      * @ORM\ManyToMany(targetEntity="Recipe")
      */
     private $recipes;
+
+    public function __construct()
+    {
+        $this->recipes = new ArrayCollection();
+    }
 
     /**
      * @return int

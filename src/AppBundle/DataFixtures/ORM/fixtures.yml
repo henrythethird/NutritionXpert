@@ -15,3 +15,8 @@ AppBundle\Entity\RecipeIngredient:
     amount: <numberBetween(1,10)>
     recipe: '@recipe_*'
     ingredient: '@ingredient_*'
+
+AppBundle\Entity\PlanDay:
+  planDay_{1..40}:
+    date: <dateTimeBetween("-40 days", "now")>
+    recipes: '5x @recipe_*'

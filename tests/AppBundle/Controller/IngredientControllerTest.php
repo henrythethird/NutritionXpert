@@ -28,4 +28,25 @@ class IngredientControllerTest extends WebTestCase
 
         $crawler = $client->submit($form);
     }
+
+    /**
+     * @dataProvider supplyRoutes
+     */
+    public function testCallRoutes($route)
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', "/ingredient");
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function supplyRoutes() {
+        return [
+            ['/ingredient'],
+            ['/ingredient/new'],
+            ['/ingredient/edit/TestIngredient'],
+            ['/ingredient/delete/TestIngredient']
+        ];
+    }
+
 }

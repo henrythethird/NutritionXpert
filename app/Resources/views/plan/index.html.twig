@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center">Hi</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th class="col-md-2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for year, yearDays in planDays %}
+                {% for month, monthDays in yearDays %}
+            <tr>
+                <th colspan="2">
+                    <h3 class="text-center">{{ year }}-{{ month }}</h3>
+                </th>
+            </tr>
+                    {% for day, planDayList in  monthDays %}
+            <tr class="data">
+                <td>{{ day }}.{{ month }}.{{ year }}</td>
+                <td></td>
+            </tr>
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
