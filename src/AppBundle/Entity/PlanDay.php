@@ -23,14 +23,10 @@ class PlanDay
     private $date;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Recipe")
+     * @ORM\ManyToOne(targetEntity="Recipe")
+     * @ORM\JoinColumn(referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
-    private $recipes;
-
-    public function __construct()
-    {
-        $this->recipes = new ArrayCollection();
-    }
+    private $recipe;
 
     /**
      * @return int
@@ -65,18 +61,18 @@ class PlanDay
     }
 
     /**
-     * @return Recipe[]
+     * @return Recipe
      */
-    public function getRecipes()
+    public function getRecipe()
     {
-        return $this->recipes;
+        return $this->recipe;
     }
 
     /**
-     * @param Recipe $recipes
+     * @param Recipe $recipe
      */
-    public function setRecipes($recipes)
+    public function setRecipe($recipe)
     {
-        $this->recipes = $recipes;
+        $this->recipe = $recipe;
     }
 }

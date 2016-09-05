@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center">Day: {{ date }}</h1>
+
+    <table class="table table-striped">
+        {% for planDay in planDays %}
+            <tr class="entries"><td>{{ planDay.recipe.name }}</td></tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -26,4 +26,22 @@ class PlanController extends Controller
             'planDays' => $planDayUtil->separateByTimeline()
         ];
     }
+
+    /**
+     * @Route(path="/plan/day/{date}", name="plan_day")
+     * @Template("plan/day.html.twig")
+     */
+    public function dayAction($date)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $days = $em->getRepository(PlanDay::class)
+            ->findBy([
+                'date' => new \DateTime($date)
+            ]);
+
+        return [
+            'date' => $date,
+            'planDays' => $days
+        ];
+    }
 }
