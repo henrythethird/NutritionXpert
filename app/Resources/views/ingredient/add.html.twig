@@ -1,11 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'ingredient/edit.html.twig' %}
 
-{% block body %}
-    <h2>New Ingredient</h2>
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-
-        <button type="submit" class="btn btn-primary" formnovalidate>Save New Ingredient</button>
-        <a class="btn btn-default" href="{{ path('ingredient_list') }}">Cancel</a>
-    {{ form_end(form) }}
-{% endblock %}
+{% block form_title %}New Ingredient{% endblock %}
+{% block form_button %}Save New Ingredient{% endblock %}

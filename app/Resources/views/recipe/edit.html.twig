@@ -6,7 +6,7 @@
     {{ form_row(form.name) }}
     {{ form_row(form.rating) }}
 
-    <h3>Ingredients</h3>
+    <h3>{% block form_title %}Ingredients{% endblock %}</h3>
     <div id="js-holder" class="container" data-prototype="{{ form_widget(form.recipeIngredients.vars.prototype)|e('html_attr') }}">
         {% for recipeIngredient in form.recipeIngredients %}
             <div class="row">
@@ -27,7 +27,9 @@
             </div>
     </div>
 
-    <button type="submit" class="btn btn-primary" formnovalidate>Save Changes</button>
+    <button type="submit" class="btn btn-primary" formnovalidate>
+        {% block form_button %}Save Changes{% endblock %}
+    </button>
     <a class="btn btn-default" href="{{ path('recipe_list') }}">Cancel</a>
     {{ form_end(form) }}
 

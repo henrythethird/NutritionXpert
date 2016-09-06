@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>Edit Ingredient</h2>
+    <h2>{% block form_title %}Edit Ingredient{% endblock %}</h2>
     {{ form_start(form) }}
     {{ form_widget(form) }}
 
-    <button type="submit" class="btn btn-primary" formnovalidate>Save Changes</button>
+    <button type="submit" class="btn btn-primary" formnovalidate>{% block form_button %}Save Changes{% endblock %}</button>
     <a class="btn btn-default" href="{{ path('ingredient_list') }}">Cancel</a>
     {{ form_end(form) }}
 {% endblock %}

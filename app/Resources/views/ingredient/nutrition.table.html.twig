@@ -1,0 +1,108 @@
+<style>
+    table.nutrition_table {
+        display: inline-block;
+    }
+
+    table.nutrition_table tr {
+        border: 1px solid black;
+    }
+
+    table.nutrition_table td, table.nutrition_table th {
+        padding: 0px 10px;
+    }
+
+    table.nutrition_table tr.separator {
+        height: 4px;
+        background-color: black;
+    }
+ </style>
+<table class="nutrition_table">
+    <tbody>
+        <tr>
+            <td colspan="2"><h4>Nutrition Facts</h4></td>
+        </tr>
+        <tr class="separator"><td colspan="2"></td></tr>
+        <tr class="separator"><td colspan="2"></td></tr>
+        <tr>
+            <td colspan="2"><strong>Amount per 100g</strong></td>
+        </tr>
+        <tr>
+            <td colspan="2"><strong>Calories: </strong> {{ ingredient.calories }}kcal</td>
+        </tr>
+        <tr class="separator"><td colspan="2"></td></tr>
+        <tr>
+            <td></td>
+            <td class="text-right">% Daily Value</td>
+        </tr>
+        <tr>
+            <td><strong>Water: </strong>{{ ingredient.water }}g</td>
+            <th class="text-right"></th>
+        </tr>
+        <tr>
+            <td><strong>Alcohol: </strong>{{ ingredient.alcohol }}g</td>
+            <th class="text-right"></th>
+        </tr>
+        <tr>
+            <td><strong>Total Fat: </strong>{{ ingredient.fat }}g</td>
+            <th class="text-right">2%</th>
+        </tr>
+        <tr>
+            <td style="padding-left: 25px">Saturated Fat: {{ ingredient.fattyAcidsSaturated }}g</td>
+            <th class="text-right">10%</th>
+        </tr>
+        <tr>
+            <td style="padding-left: 25px">Mono-Saturated Fat: {{ ingredient.fattyAcidsMono }}g</td>
+            <th class="text-right">10%</th>
+        </tr>
+        <tr>
+            <td style="padding-left: 25px">Poly-Saturated Fat: {{ ingredient.fattyAcidsPoly }}g</td>
+            <th class="text-right">10%</th>
+        </tr>
+        <tr>
+            <td><strong>Cholesterol: </strong>{{ ingredient.cholesterol }}mg</td>
+            <th class="text-right">10%</th>
+        </tr>
+        <tr>
+            <td><strong>Sodium: </strong>{{ ingredient.sodium }}mg</td>
+            <th class="text-right">10%</th>
+        </tr>
+        <tr>
+            <td><strong>Total Carbohydrate: </strong>{{ ingredient.carbs }}g</td>
+            <th class="text-right">4%</th>
+        </tr>
+        <tr>
+            <td style="padding-left: 25px">Sugars: {{ ingredient.sugars }}g</td>
+            <td class="text-right">10%</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 25px">Starch: {{ ingredient.starch }}g</td>
+            <td class="text-right">10%</td>
+        </tr>
+        <tr>
+            <td><strong>Dietary Fibers:</strong> {{ ingredient.dietaryFibres }}g</td>
+            <th class="text-right">10%</th>
+        </tr>
+        <tr>
+            <td><strong>Protein: </strong>{{ ingredient.protein }}g</td>
+            <th class="text-right">2%</th>
+        </tr>
+        <tr class="separator"><td colspan="2"></td></tr>
+        <tr class="separator"><td colspan="2"></td></tr>
+        <tr>
+            <td>Vitamin A: {{ ingredient.vitaminA }}&mu;g</td>
+            <td class="text-right">2%</td>
+        </tr>
+        <tr>
+            <td>Vitamin C: {{ ingredient.vitaminC }}mg</td>
+            <td class="text-right">2%</td>
+        </tr>
+        <tr>
+            <td>Calcium: {{ ingredient.calcium }}mg</td>
+            <td class="text-right">2%</td>
+        </tr>
+        <tr>
+            <td>Iron: {{ ingredient.iron }}mg</td>
+            <td class="text-right">2%</td>
+        </tr>
+    </tbody>
+</table>
