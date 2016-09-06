@@ -2,32 +2,24 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Util\RecipeUtil;
 use Doctrine\ORM\Mapping;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 /**
  * @Doctrine\ORM\Mapping\Entity
- * @Doctrine\ORM\Mapping\Table()
- * @UniqueEntity("name")
+ * @Mapping\HasLifecycleCallbacks()
+ * @Mapping\Table()
  */
-class Recipe
+class Recipe extends Ingredient
 {
-    /**
-     * @Mapping\Id
-     * @Mapping\GeneratedValue(strategy="AUTO")
-     * @Mapping\Column(type="integer")
-     */
-    private $id;
-    /**
-     * @Mapping\Column(type="string", unique=true)
-     */
-    private $name;
     /**
      * @Mapping\Column(type="smallint")
      */
-    private $rating;
+    private $rating = 0;
 
     /**
      * @Mapping\OneToMany(targetEntity="RecipeIngredient", mappedBy="recipe", cascade={"persist"})
@@ -35,37 +27,21 @@ class Recipe
      */
     private $recipeIngredients;
 
+    /**
+     * @Mapping\Column(type="integer")
+     * @GreaterThanOrEqual(0)
+     * @var int
+     */
+    private $servings = 0;
+
     public function __construct()
     {
         $this->recipeIngredients = new ArrayCollection();
+
     }
 
     /**
      * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return mixed
      */
     public function getRating()
     {
@@ -73,7 +49,7 @@ class Recipe
     }
 
     /**
-     * @param mixed $rating
+     * @param int $rating
      */
     public function setRating($rating)
     {
@@ -81,7 +57,7 @@ class Recipe
     }
 
     /**
-     * @return array RecipeIngredient
+     * @return ArrayCollection RecipeIngredient
      */
     public function getRecipeIngredients()
     {
@@ -101,5 +77,35 @@ class Recipe
     public function removeRecipeIngredient(RecipeIngredient $recipeIngredient)
     {
         $this->recipeIngredients->removeElement($recipeIngredient);
+    }
+
+    /**
+     * @Mapping\PreFlush()
+     */
+    public function preFlush()
+    {
+        $util = new RecipeUtil($this);
+        $sum = $util->summarizeIngredients();
+
+        $this->setFat($sum['fat']);
+        $this->setCalories($sum['calories']);
+        $this->setCarbs($sum['carbs']);
+        $this->setProtein($sum['protein']);
+    }
+
+    /**
+     * @return int
+     */
+    public function getServings()
+    {
+        return $this->servings;
+    }
+
+    /**
+     * @param int $servings
+     */
+    public function setServings($servings)
+    {
+        $this->servings = $servings;
     }
 }

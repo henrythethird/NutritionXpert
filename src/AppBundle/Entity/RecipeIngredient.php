@@ -22,7 +22,7 @@ class RecipeIngredient
      */
     private $recipe;
     /**
-     * @ORM\ManyToOne(targetEntity="Ingredient", inversedBy="recipeIngredients")
+     * @ORM\ManyToOne(targetEntity="Ingredient", inversedBy="ingredientRecipes")
      * @ORM\JoinColumn(name="ingredient_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $ingredient;

@@ -28,7 +28,7 @@ class IngredientController extends Controller
     }
 
     /**
-     * @Route("/ingredient/edit/{name}", name="ingredient_edit")
+     * @Route("/ingredient/edit/{id}", name="ingredient_edit")
      * @Template("ingredient/edit.html.twig")
      */
     public function editAction(Request $request, Ingredient $ingredient)
@@ -55,7 +55,7 @@ class IngredientController extends Controller
     }
 
     /**
-     * @Route("/ingredient/delete/{name}", name="ingredient_delete")
+     * @Route("/ingredient/delete/{id}", name="ingredient_delete")
      */
     public function deleteAction(Ingredient $ingredient)
     {
@@ -94,7 +94,7 @@ class IngredientController extends Controller
     }
 
     /**
-     * @Route("/ingredient/details/{name}", name="ingredient_show")
+     * @Route("/ingredient/details/{id}", name="ingredient_show")
      * @Template("ingredient/show.html.twig")
      */
     public function showAction(Ingredient $ingredient) {

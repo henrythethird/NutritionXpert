@@ -9,6 +9,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Mapping\Entity(repositoryClass="AppBundle\Repository\IngredientRepository")
  * @Mapping\Table()
  * @UniqueEntity("name")
+ * @Mapping\InheritanceType("SINGLE_TABLE")
+ * @Mapping\DiscriminatorColumn(name="type", type="string")
+ * @Mapping\DiscriminatorMap({"ingredient" = "Ingredient", "recipe" = "Recipe"})
  */
 class Ingredient {
 	/**
@@ -27,34 +30,38 @@ class Ingredient {
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
 	 * @Assert\GreaterThanOrEqual(0)
      */
-    private $calories = 0;
+    protected $calories = 0;
 	/**
-	 * @Mapping\Column(type="decimal", precision=5, scale=2)
+	 * @Mapping\Column(type="decimal", precision=10, scale=2)
 	 * @Assert\GreaterThanOrEqual(0)
+	 * @var float
      */
-    private $fat = 0;
+	protected $fat = 0;
 	/**
-	 * @Mapping\Column(type="decimal", precision=5, scale=2)
+	 * @Mapping\Column(type="decimal", precision=10, scale=2)
 	 * @Assert\GreaterThanOrEqual(0)
+	 * @var float
      */
-    private $carbs = 0;
+	protected $carbs = 0;
 
 	/**
-	 * @Mapping\Column(type="decimal", precision=5, scale=2)
+	 * @Mapping\Column(type="decimal", precision=10, scale=2)
 	 * @Assert\GreaterThanOrEqual(0)
+	 * @var float
      */
-    private $protein = 0;
+	protected $protein = 0;
 	/**
-	 * @Mapping\Column(type="decimal", precision=5, scale=2)
+	 * @Mapping\Column(type="decimal", precision=10, scale=2)
 	 * @Assert\GreaterThanOrEqual(0)
+	 * @var float
      */
-    private $alcohol = 0;
+	protected $alcohol = 0;
 
 	/**
 	 * @Mapping\OneToMany(targetEntity="RecipeIngredient", mappedBy="ingredient", cascade={"persist"})
 	 * @Mapping\JoinColumn(onDelete="CASCADE")
 	 */
-	private $recipeIngredients;
+	private $ingredientRecipes;
 
 	/**
 	 * @return int
@@ -81,7 +88,7 @@ class Ingredient {
 	}
 
 	/**
-	 * @return mixed
+	 * @return float
 	 */
 	public function getFat()
 	{
@@ -89,7 +96,7 @@ class Ingredient {
 	}
 
 	/**
-	 * @param mixed $fat
+	 * @param float $fat
 	 */
 	public function setFat($fat)
 	{
@@ -97,7 +104,7 @@ class Ingredient {
 	}
 
 	/**
-	 * @return mixed
+	 * @return float
 	 */
 	public function getCarbs()
 	{
@@ -105,7 +112,7 @@ class Ingredient {
 	}
 
 	/**
-	 * @param mixed $carbs
+	 * @param float $carbs
 	 */
 	public function setCarbs($carbs)
 	{
@@ -113,7 +120,7 @@ class Ingredient {
 	}
 
 	/**
-	 * @return mixed
+	 * @return float
 	 */
 	public function getProtein()
 	{
@@ -121,7 +128,7 @@ class Ingredient {
 	}
 
 	/**
-	 * @param mixed $protein
+	 * @param float $protein
 	 */
 	public function setProtein($protein)
 	{
@@ -129,7 +136,7 @@ class Ingredient {
 	}
 
 	/**
-	 * @return mixed
+	 * @return float
 	 */
 	public function getAlcohol()
 	{
@@ -137,7 +144,7 @@ class Ingredient {
 	}
 
 	/**
-	 * @param mixed $alcohol
+	 * @param float $alcohol
 	 */
 	public function setAlcohol($alcohol = 0)
 	{
@@ -145,7 +152,7 @@ class Ingredient {
 	}
 
 	/**
-	 * @return mixed
+	 * @return float
 	 */
 	public function getCalories()
 	{
@@ -153,7 +160,7 @@ class Ingredient {
 	}
 
 	/**
-	 * @param mixed $calories
+	 * @param float $calories
 	 */
 	public function setCalories($calories)
 	{

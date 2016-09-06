@@ -10,6 +10,11 @@ AppBundle\Entity\Recipe:
   recipe_{1..10}:
     name: <name()>
     rating: <numberBetween(1,100)>
+    calories: 0
+    carbs: 0
+    protein: 0
+    fat: 0
+    alcohol: 0
 AppBundle\Entity\RecipeIngredient:
   recipeIngredient_{1..40}:
     amount: <numberBetween(1,10)>

@@ -25,17 +25,17 @@
         <tbody>
             {% for ingredient in ingredients %}
             <tr>
-                <td><a href="{{ path('ingredient_show', {'name': ingredient.name}) }}">{{ ingredient.name }}</a></td>
+                <td><a href="{{ path('ingredient_show', {'id': ingredient.id }) }}">{{ ingredient.name }}</a></td>
                 <td class="text-right">{{ ingredient.calories }}kcal</td>
                 <td class="text-right">{{ ingredient.fat }}g</td>
                 <td class="text-right">{{ ingredient.carbs }}g</td>
                 <td class="text-right">{{ ingredient.protein }}g</td>
                 <td class="text-right">{{ ingredient.alcohol }}g</td>
                 <td class="text-right">
-                    <a class="btn btn-primary" href="{{ path('ingredient_edit', {'name': ingredient.name}) }}">
+                    <a class="btn btn-primary" href="{{ path('ingredient_edit', {'id': ingredient.id}) }}">
                         <span class="glyphicon glyphicon-edit"></span> Edit
                     </a>
-                    <a class="btn btn-danger" href="{{ path('ingredient_delete', {'name': ingredient.name}) }}">
+                    <a class="btn btn-danger" href="{{ path('ingredient_delete', {'id': ingredient.id}) }}">
                         <span class="glyphicon glyphicon-remove"></span> Delete
                     </a>
                 </td>
@@ -62,16 +62,15 @@
                     },
                 },
                 escapeMarkup: function(markup) { return markup; },
-                minimumInputLength: 1,
+                minimumInputLength: 3,
                 templateResult: function(res) {
                     if (res.loading) return res.text;
-                    var markup = '<div><div>' + res.name + '</div>';
-                    markup += '<table><th>Calories: </th><td>' + res.calories + 'kcal</td>';
-                    markup += '<tr><th>Carbs: </th><td>' + res.carbs + 'g</td></tr>';
-                    markup += '<tr><th>Fat: </th><td>' + res.fat + 'g</td></tr>';
-                    markup += '<tr><th>Protein: </th><td>' + res.protein + 'g</td></tr>';
-                    markup += '<tr><th>Alcohol: </th><td>' + res.alcohol + 'g</td></tr>';
-                    markup += '</table></div>';
+                    var markup = '<div class="container"><div class="col-md-4"><b>' + res.name + '</b></div>';
+                    markup += '<div class="col-md-2"><b>Calories:</b> ' + res.calories + 'kcal</div>';
+                    markup += '<div class="col-md-2"><b>Carbs:</b> ' + res.carbs + 'g</div>';
+                    markup += '<div class="col-md-2"><b>Fat:</b> ' + res.fat + 'g</div>';
+                    markup += '<div class="col-md-2"><b>Protein:</b> ' + res.protein + 'g</div>';
+                    markup += '</div>';
                     return markup;
                 },
                 templateSelection: function(res) {
