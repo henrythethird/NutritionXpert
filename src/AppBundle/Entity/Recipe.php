@@ -87,10 +87,42 @@ class Recipe extends Ingredient
         $util = new RecipeUtil($this);
         $sum = $util->summarizeIngredients();
 
-        $this->setFat($sum['fat']);
+        $this->setAlcohol($sum['alcohol']);
+        $this->setBetaCarotene($sum['betaCarotene']);
+        $this->setBetaCaroteneActivity($sum['betaCaroteneActivity']);
         $this->setCalories($sum['calories']);
         $this->setCarbs($sum['carbs']);
+        $this->setFat($sum['fat']);
+        $this->setCalcium($sum['calcium']);
+        $this->setChloride($sum['chloride']);
+        $this->setCholesterol($sum['cholesterol']);
+        $this->setDietaryFibres($sum['dietaryFibres']);
+        $this->setFattyAcidsMono($sum['fattyAcidsMono']);
+        $this->setFattyAcidsPoly($sum['fattyAcidsPoly']);
+        $this->setFattyAcidsSaturated($sum['fattyAcidsSaturated']);
+        $this->setFolate($sum['folate']);
+        $this->setIodine($sum['iodine']);
+        $this->setIron($sum['iron']);
+        $this->setMagnesium($sum['magnesium']);
+        $this->setNiacin($sum['niacin']);
+        $this->setPantothenicAcid($sum['pantothenicAcid']);
+        $this->setPhosphorous($sum['phosphorous']);
+        $this->setPotassium($sum['potassium']);
         $this->setProtein($sum['protein']);
+        $this->setRetinolEquiv($sum['retinolEquiv']);
+        $this->setSodium($sum['sodium']);
+        $this->setStarch($sum['starch']);
+        $this->setSugars($sum['sugars']);
+        $this->setVitaminA($sum['vitaminA']);
+        $this->setVitaminB1($sum['vitaminB1']);
+        $this->setVitaminB2($sum['vitaminB2']);
+        $this->setVitaminB6($sum['vitaminB6']);
+        $this->setVitaminB12($sum['vitaminB12']);
+        $this->setVitaminC($sum['vitaminC']);
+        $this->setVitaminD($sum['vitaminD']);
+        $this->setVitaminE($sum['vitaminE']);
+        $this->setWater($sum['water']);
+        $this->setZinc($sum['zinc']);
     }
 
     /**
