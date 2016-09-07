@@ -3,7 +3,7 @@
 {% block body %}
     <h1 class="text-center">{{ recipe.name }}</h1>
     <a class="btn btn-default" href="{{ path('recipe_list') }}">To the List</a>
-    <br /><br />
+    <br><br>
     <dl>
         <dt>Rating:</dt>
         <dd>{{ recipe.rating }}</dd>
@@ -25,12 +25,12 @@
         <tbody>
             {% for recipeIngredient in recipe.recipeIngredients %}
             <tr>
-                <td><a href="{{ path('ingredient_show', {'name': recipeIngredient.ingredient.name}) }}">{{ recipeIngredient.ingredient.name }}</a></td>
-                <td class="text-right">{{ recipeIngredient.amount }}</td>
-                <td class="text-right">{{ recipeIngredient.ingredient.calories }}</td>
-                <td class="text-right">{{ recipeIngredient.ingredient.carbs }}</td>
-                <td class="text-right">{{ recipeIngredient.ingredient.fat }}</td>
-                <td class="text-right">{{ recipeIngredient.ingredient.protein }}</td>
+                <td><a href="{{ path('ingredient_show', {'id': recipeIngredient.ingredient.id}) }}">{{ recipeIngredient.ingredient.name }}</a></td>
+                <td class="text-right">{{ recipeIngredient.amount * 100 }}g</td>
+                <td class="text-right">{{ recipeIngredient.ingredient.calories * recipeIngredient.amount }}kcal</td>
+                <td class="text-right">{{ recipeIngredient.ingredient.carbs * recipeIngredient.amount}}g</td>
+                <td class="text-right">{{ recipeIngredient.ingredient.fat * recipeIngredient.amount}}g</td>
+                <td class="text-right">{{ recipeIngredient.ingredient.protein * recipeIngredient.amount}}g</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -38,12 +38,13 @@
             <tr>
                 <th>Total</th>
                 <th></th>
-                <th class="text-right">{{ sum.calories }}</th>
-                <th class="text-right">{{ sum.carbs }}</th>
-                <th class="text-right">{{ sum.fat }}</th>
-                <th class="text-right">{{ sum.protein }}</th>
+                <th class="text-right">{{ recipe.calories }}kcal</th>
+                <th class="text-right">{{ recipe.carbs }}g</th>
+                <th class="text-right">{{ recipe.fat }}g</th>
+                <th class="text-right">{{ recipe.protein }}g</th>
             </tr>
         </tfoot>
     </table>
 
+    {% include 'ingredient/nutrition.table.html.twig' with {ingredient: recipe} %}
 {% endblock %}

@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Ingredient;
 use AppBundle\Form\IngredientForm;
+use AppBundle\Util\RecipeUtil;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -100,7 +101,8 @@ class IngredientController extends Controller
     public function showAction(Ingredient $ingredient) {
         return [
            'ingredient' => $ingredient,
-            'name' => $ingredient->getName()
+            'name' => $ingredient->getName(),
+            'dav' => RecipeUtil::DAV
         ];
     }
 

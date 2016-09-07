@@ -7,6 +7,37 @@ use AppBundle\Entity\RecipeIngredient;
 
 class RecipeUtil
 {
+    const DAV = [
+        'calories' => 2000,
+        'fat' => 65,
+        'fattyAcidsSaturated' => 20,
+        'cholesterol' => 300,
+        'sodium' => 2400,
+        'potassium' => 3500,
+        'carbs' => 300,
+        'dietaryFibres' => 25,
+        'protein' => 50,
+        'vitaminA' => 5000,
+        'vitaminC' => 60,
+        'calcium' => 1000,
+        'iron' => 18,
+        'vitaminD' => 400,
+        'vitaminE' => 30,
+        'niacin' => 20,
+        'vitaminB6' => 2,
+        'folate' => 400,
+        'vitaminB12' => 6,
+        'pantothenicAcid' => 10,
+        'phosphorus' => 1000,
+        'iodine' => 150,
+        'magnesium' => 400,
+        'zinc' => 15,
+        'chloride' => 3400,
+    ];
+
+    /**
+     * @var Recipe
+     */
     private $recipe;
 
     public function __construct(Recipe $recipe)
@@ -99,6 +130,41 @@ class RecipeUtil
             $summarizer['water'] += $amount * $ingredient->getWater();
             $summarizer['zinc'] += $amount * $ingredient->getZinc();
         }
-        return $summarizer;
+        $this->recipe->setAlcohol($summarizer['alcohol']);
+        $this->recipe->setBetaCarotene($summarizer['betaCarotene']);
+        $this->recipe->setBetaCaroteneActivity($summarizer['betaCaroteneActivity']);
+        $this->recipe->setCalories($summarizer['calories']);
+        $this->recipe->setCarbs($summarizer['carbs']);
+        $this->recipe->setFat($summarizer['fat']);
+        $this->recipe->setCalcium($summarizer['calcium']);
+        $this->recipe->setChloride($summarizer['chloride']);
+        $this->recipe->setCholesterol($summarizer['cholesterol']);
+        $this->recipe->setDietaryFibres($summarizer['dietaryFibres']);
+        $this->recipe->setFattyAcidsMono($summarizer['fattyAcidsMono']);
+        $this->recipe->setFattyAcidsPoly($summarizer['fattyAcidsPoly']);
+        $this->recipe->setFattyAcidsSaturated($summarizer['fattyAcidsSaturated']);
+        $this->recipe->setFolate($summarizer['folate']);
+        $this->recipe->setIodine($summarizer['iodine']);
+        $this->recipe->setIron($summarizer['iron']);
+        $this->recipe->setMagnesium($summarizer['magnesium']);
+        $this->recipe->setNiacin($summarizer['niacin']);
+        $this->recipe->setPantothenicAcid($summarizer['pantothenicAcid']);
+        $this->recipe->setPhosphorous($summarizer['phosphorous']);
+        $this->recipe->setPotassium($summarizer['potassium']);
+        $this->recipe->setProtein($summarizer['protein']);
+        $this->recipe->setRetinolEquiv($summarizer['retinolEquiv']);
+        $this->recipe->setSodium($summarizer['sodium']);
+        $this->recipe->setStarch($summarizer['starch']);
+        $this->recipe->setSugars($summarizer['sugars']);
+        $this->recipe->setVitaminA($summarizer['vitaminA']);
+        $this->recipe->setVitaminB1($summarizer['vitaminB1']);
+        $this->recipe->setVitaminB2($summarizer['vitaminB2']);
+        $this->recipe->setVitaminB6($summarizer['vitaminB6']);
+        $this->recipe->setVitaminB12($summarizer['vitaminB12']);
+        $this->recipe->setVitaminC($summarizer['vitaminC']);
+        $this->recipe->setVitaminD($summarizer['vitaminD']);
+        $this->recipe->setVitaminE($summarizer['vitaminE']);
+        $this->recipe->setWater($summarizer['water']);
+        $this->recipe->setZinc($summarizer['zinc']);
     }
 }

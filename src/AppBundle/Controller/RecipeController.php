@@ -39,7 +39,8 @@ class RecipeController extends Controller
         $recipeUtil = new RecipeUtil($recipe);
         return [
             'recipe' => $recipe,
-            'sum' => $recipeUtil->summarizeIngredients()
+            'sum' => $recipeUtil->summarizeIngredients(),
+            'dav' => RecipeUtil::DAV
         ];
     }
 
