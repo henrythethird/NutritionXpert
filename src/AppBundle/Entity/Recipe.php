@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 /**
  * @Doctrine\ORM\Mapping\Entity
@@ -26,13 +25,6 @@ class Recipe extends Ingredient
      * @JoinColumn(onDelete="CASCADE")
      */
     private $recipeIngredients;
-
-    /**
-     * @Mapping\Column(type="integer")
-     * @GreaterThanOrEqual(0)
-     * @var int
-     */
-    private $servings = 0;
 
     public function __construct()
     {
@@ -86,21 +78,5 @@ class Recipe extends Ingredient
     {
         $util = new RecipeUtil($this);
         $sum = $util->summarizeIngredients();
-    }
-
-    /**
-     * @return int
-     */
-    public function getServings()
-    {
-        return $this->servings;
-    }
-
-    /**
-     * @param int $servings
-     */
-    public function setServings($servings)
-    {
-        $this->servings = $servings;
     }
 }

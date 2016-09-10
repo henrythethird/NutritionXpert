@@ -4,6 +4,7 @@
     <h2>Edit Recipe</h2>
     {{ form_start(form) }}
     {{ form_row(form.name) }}
+    {{ form_row(form.servings) }}
     {{ form_row(form.rating) }}
 
     <h3>{% block form_title %}Ingredients{% endblock %}</h3>
@@ -40,6 +41,9 @@
             var newForm = prototype.replace(/__name__/g, index);
             var $newRow = $("<div class='row'></div>").append(newForm);
             $addRow.before($newRow);
+            $newRow.find('.select2entity').last().select2entity();
         }
     </script>
+    <script src="{{ asset('bundles/tetranzselect2entity/js/select2entity.js') }}"></script>
+
 {% endblock %}

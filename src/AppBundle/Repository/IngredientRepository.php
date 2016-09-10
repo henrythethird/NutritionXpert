@@ -8,15 +8,29 @@ use Doctrine\ORM\Query;
 
 class IngredientRepository extends EntityRepository
 {
+    const CONTAINS_LIMIT = 20;
     /**
-     * @param $term String
+     * @param $searchTerm String
      * @return ArrayCollection
      */
-    public function byNameContains($term) {
-        return $this->createQueryBuilder("ingredient")
-            ->andWhere("ingredient.name LIKE :searchTerm")
-            ->setParameter("searchTerm", "%$term%")
+    public function byNameContains($searchTerm)
+    {
+        $termExplode = explode(" ", $searchTerm);
+        $termExplode = array_filter($termExplode, function ($val) {
+            return !empty($val);
+        });
+
+        $query = $this->createQueryBuilder("ingredient");
+
+        foreach ($termExplode as $id => $term) {
+            $query
+                ->andWhere("ingredient.name LIKE :searchTerm$id")
+                ->setParameter("searchTerm$id", "%$term%");
+        }
+
+        return $query
             ->orderBy("ingredient.name")
+            ->setMaxResults(self::CONTAINS_LIMIT)
             ->getQuery()
             ->getResult(Query::HYDRATE_ARRAY);
     }

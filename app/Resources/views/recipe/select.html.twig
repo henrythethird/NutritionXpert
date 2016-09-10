@@ -1,0 +1,41 @@
+{% block body %}
+    <select id="js-search-ingredients" class="form-control"></select>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $(function() {
+            $('#js-search-ingredients').select2({
+                ajax: {
+                    url: '{{ path('ingredient_search') }}',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            q: params.term,
+                            page: params.page
+                        }
+                    },
+                    processResults: function(data, params) {
+                        return data;
+                    },
+                },
+                escapeMarkup: function(markup) { return markup; },
+                minimumInputLength: 3,
+                templateResult: function(res) {
+                    if (res.loading) return res.text;
+                    var markup = '<div class="container"><div class="col-md-4"><b>' + res.name + '</b></div>';
+                    markup += '<div class="col-md-2"><b>Calories:</b> ' + res.calories + 'kcal</div>';
+                    markup += '<div class="col-md-2"><b>Carbs:</b> ' + res.carbs + 'g</div>';
+                    markup += '<div class="col-md-2"><b>Fat:</b> ' + res.fat + 'g</div>';
+                    markup += '<div class="col-md-2"><b>Protein:</b> ' + res.protein + 'g</div>';
+                    markup += '</div>';
+                    return markup;
+                },
+                templateSelection: function(res) {
+                    return res.name;
+                }
+            });
+        });
+    </script>
+{% endblock %}

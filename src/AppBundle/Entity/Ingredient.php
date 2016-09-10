@@ -1,9 +1,11 @@
 <?php
 
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 /**
  * @Mapping\Entity(repositoryClass="AppBundle\Repository\IngredientRepository")
@@ -29,254 +31,261 @@ class Ingredient {
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
      */
     protected $calories = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
      */
 	protected $fat = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
      */
 	protected $carbs = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
      */
 	protected $protein = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
      */
 	protected $alcohol = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $water = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $starch = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $sugars = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $dietaryFibres = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $cholesterol = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $fattyAcidsMono = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $fattyAcidsSaturated = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $fattyAcidsPoly = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $vitaminA = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $retinolEquiv = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $betaCarotene = 0;
 
     /**
      * @Mapping\Column(type="decimal", precision=10, scale=2)
-     * @Assert\GreaterThanOrEqual(0)
+     * @GreaterThanOrEqual(0)
      * @var float
      */
     protected $betaCaroteneActivity = 0;
 
     /**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $vitaminB1 = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $vitaminB2 = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $vitaminB6 = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $vitaminB12 = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $niacin = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $folate = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $pantothenicAcid = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $vitaminC = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $vitaminD = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $vitaminE = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $sodium = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $potassium = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $chloride = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $calcium = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $magnesium = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $phosphorous = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $iron = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $iodine = 0;
 
 	/**
 	 * @Mapping\Column(type="decimal", precision=10, scale=2)
-	 * @Assert\GreaterThanOrEqual(0)
+	 * @GreaterThanOrEqual(0)
 	 * @var float
 	 */
 	protected $zinc = 0;
+
+    /**
+     * @Mapping\Column(type="integer")
+     * @GreaterThanOrEqual(1)
+     * @var int
+     */
+    private $servings = 1;
 
 	/**
 	 * @Mapping\OneToMany(targetEntity="RecipeIngredient", mappedBy="ingredient", cascade={"persist"})
@@ -882,6 +891,22 @@ class Ingredient {
     public function setBetaCaroteneActivity($betaCaroteneActivity)
     {
         $this->betaCaroteneActivity = $betaCaroteneActivity;
+    }
+
+    /**
+     * @return int
+     */
+    public function getServings()
+    {
+        return $this->servings;
+    }
+
+    /**
+     * @param int $servings
+     */
+    public function setServings($servings)
+    {
+        $this->servings = $servings;
     }
 
 	public function __toString()

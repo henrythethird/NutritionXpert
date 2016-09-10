@@ -18,10 +18,14 @@ class IngredientController extends Controller
      * @Route("/ingredient", name="ingredient_list")
      * @Template("ingredient/index.html.twig")
      */
-    public function listAction() {
-        $ingredients = $this->getDoctrine()
-            ->getRepository(Ingredient::class)
-            ->findAll();
+    public function listAction(Request $request) {
+        $searchTerm = $request->get('q');
+        $ingredients = [];
+        if (!empty($searchTerm)) {
+            $ingredients = $this->getDoctrine()
+                ->getRepository(Ingredient::class)
+                ->byNameContains($searchTerm);
+        }
 
         return [
             'ingredients' => $ingredients
@@ -117,8 +121,14 @@ class IngredientController extends Controller
             ->getRepository(Ingredient::class)
             ->byNameContains($ingredientName);
 
-        return new JsonResponse([
-            'results' => $ingredients
-        ]);
+        $response = [];
+        foreach ($ingredients as $ingredient) {
+            $response[] = [
+                'id' => $ingredient['id'],
+                'text' => $ingredient['name']
+            ];
+        }
+
+        return new JsonResponse($response);
     }
 }

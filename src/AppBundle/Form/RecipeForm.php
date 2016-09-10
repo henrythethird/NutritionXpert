@@ -16,6 +16,7 @@ class RecipeForm extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
+            ->add('servings', NumberType::class)
             ->add('rating', NumberType::class)
             ->add('recipeIngredients', CollectionType::class, [
                 'entry_type' => RecipeIngredientForm::class,

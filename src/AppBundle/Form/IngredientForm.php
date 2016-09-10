@@ -15,6 +15,7 @@ class IngredientForm extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
+            ->add('servings', NumberType::class)
             ->add('calories', NumberType::class)
             ->add('fat', NumberType::class)
             ->add('carbs', NumberType::class)
