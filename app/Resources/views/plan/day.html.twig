@@ -5,7 +5,7 @@
 
     <table class="table table-striped">
         {% for planDay in planDays %}
-            <tr class="entries"><td>{{ planDay.recipe.name }}</td></tr>
+            <tr class="entries"><td>{{ planDay.ingredient.name }}</td></tr>
         {% endfor %}
     </table>
 {% endblock %}

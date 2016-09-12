@@ -23,10 +23,10 @@ class PlanDay
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Recipe")
+     * @ORM\ManyToOne(targetEntity="Ingredient")
      * @ORM\JoinColumn(referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
-    private $recipe;
+    private $ingredient;
 
     /**
      * @return int
@@ -61,18 +61,18 @@ class PlanDay
     }
 
     /**
-     * @return Recipe
+     * @return Ingredient
      */
-    public function getRecipe()
+    public function getIngredient()
     {
-        return $this->recipe;
+        return $this->ingredient;
     }
 
     /**
-     * @param Recipe $recipe
+     * @param Ingredient $recipe
      */
-    public function setRecipe($recipe)
+    public function setIngredient(Ingredient $ingredient)
     {
-        $this->recipe = $recipe;
+        $this->ingredient = $ingredient;
     }
 }

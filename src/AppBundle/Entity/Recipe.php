@@ -76,7 +76,8 @@ class Recipe extends Ingredient
      */
     public function preFlush()
     {
-        $util = new RecipeUtil($this);
-        $sum = $util->summarizeIngredients();
+        $util = new RecipeUtil();
+        $sum = $util->summarizeRecipeIngredients($this->getRecipeIngredients());
+        $util->updateRecipe($this, $sum);
     }
 }

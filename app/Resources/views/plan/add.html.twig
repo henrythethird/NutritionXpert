@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Add Plan Entry</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <button type="submit" class="btn btn-primary" formnovalidate>{% block form_button %}Save Changes{% endblock %}</button>
+    <a class="btn btn-default" href="{{ path('plan_list') }}">Cancel</a>
+    {{ form_end(form) }}
+
+    <script src="{{ asset('bundles/tetranzselect2entity/js/select2entity.js') }}"></script>
+{% endblock %}
