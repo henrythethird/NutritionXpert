@@ -3,8 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\PlanDay;
+use AppBundle\Entity\PlanDayIngredient;
 use AppBundle\Form\PlanDayForm;
+use AppBundle\Form\PlanDayIngredientForm;
 use AppBundle\Util\PlanDayUtil;
+use AppBundle\Util\RecipeUtil;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -30,31 +34,69 @@ class PlanController extends Controller
     }
 
     /**
-     * @Route(path="/plan/day/{date}", name="plan_day")
+     * @Route(path="/plan/day/{id}", name="plan_day")
      * @Template("plan/day.html.twig")
      */
-    public function dayAction($date)
+    public function dayAction(PlanDay $planDay, Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $days = $em->getRepository(PlanDay::class)
-            ->findBy([
-                'date' => new \DateTime($date)
-            ]);
+        $recipeUtil = new RecipeUtil();
+        $ingredients = $recipeUtil->summarizePlanDays($planDay);
+
+        $planDayIngredient = new PlanDayIngredient();
+        $planDayIngredient->setPlanDay($planDay);
+
+        $addForm = $this->createForm(
+            PlanDayIngredientForm::class,
+            $planDayIngredient
+        );
+        $addForm->handleRequest($request);
+
+        if ($addForm->isValid()) {
+            $planDayIngredient = $addForm->getData();
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($planDayIngredient);
+            $em->refresh($planDay);
+            $em->flush();
+
+            $this->addFlash('success', 'Added new Ingredient');
+        }
 
         return [
-            'date' => $date,
-            'planDays' => $days
+            'day' => $planDay,
+            'sum' => $ingredients,
+            'addForm' => $addForm->createView()
         ];
     }
 
     /**
-     * @Route(path="/plan/add", name="plan_add")
+     * @Route(path="/plan/ingredient/delete/{id}", name="plan_ingredient_delete")
+     */
+    public function deleteIngredientAction(PlanDayIngredient $ingredient)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($ingredient);
+        $em->flush();
+
+        $this->addFlash('success', 'Removed Ingredient '.$ingredient->getPlanDay()->getId());
+
+        return $this->redirectToRoute('plan_day', [
+            'id' => $ingredient->getPlanDay()->getId()
+        ]);
+    }
+
+    /**
+     * @Route(path="/plan/add", name="plan_add", defaults={"date"="now"})
+     * @Route(path="/plan/add/{$date}")
      * @Template("plan/add.html.twig")
      */
-    public function addAction(Request $request)
+    public function addAction(\DateTime $date, Request $request)
     {
         $form = $this->createForm(PlanDayForm::class);
-
+        $form->get('date')
+            ->setData($date);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -70,7 +112,7 @@ class PlanController extends Controller
 
             $this->addFlash('success', 'Added');
 
-            $this->redirectToRoute('plan_list');
+            return $this->redirectToRoute('plan_day', ['date' => $planDay->getDate()->format('Y-m-d')]);
         }
 
         return [

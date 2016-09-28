@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @Doctrine\ORM\Mapping\Entity
- * @Doctrine\ORM\Mapping\Table()
+ * @Doctrine\ORM\Mapping\Table
  */
-class RecipeIngredient
+class RecipeIngredient implements IngredientAmount
 {
     /**
      * @ORM\Id()
@@ -30,7 +30,7 @@ class RecipeIngredient
     /**
      * @ORM\Column(type="decimal", precision=10, scale=4)
      */
-    private $amount;
+    private $amount = 100;
 
     /**
      * @return mixed

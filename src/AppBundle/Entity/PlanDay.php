@@ -3,10 +3,13 @@
 namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @Doctrine\ORM\Mapping\Entity(repositoryClass="AppBundle\Repository\PlanDayRepository")
- * @Doctrine\ORM\Mapping\Table()
+ * @Doctrine\ORM\Mapping\Table
+ * @UniqueEntity("date")
  */
 class PlanDay
 {
@@ -14,19 +17,29 @@ class PlanDay
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     * @var int
      */
     private $id;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", unique=true)
+     * @Assert\Date()
+     * @var \DateTime
      */
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ingredient")
-     * @ORM\JoinColumn(referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @ORM\OneToMany(targetEntity="PlanDayIngredient", mappedBy="planDay", cascade={"persist"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     * @var ArrayCollection
      */
-    private $ingredient;
+    private $planDayIngredients;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+        $this->planDayIngredients = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -34,14 +47,6 @@ class PlanDay
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -55,24 +60,24 @@ class PlanDay
     /**
      * @param \DateTime $date
      */
-    public function setDate($date)
+    public function setDate(\DateTime $date)
     {
         $this->date = $date;
     }
 
     /**
-     * @return Ingredient
+     * @return mixed
      */
-    public function getIngredient()
+    public function getPlanDayIngredients()
     {
-        return $this->ingredient;
+        return $this->planDayIngredients;
     }
 
     /**
-     * @param Ingredient $recipe
+     * @param mixed $planDayIngredients
      */
-    public function setIngredient(Ingredient $ingredient)
+    public function setPlanDayIngredients($planDayIngredients)
     {
-        $this->ingredient = $ingredient;
+        $this->planDayIngredients = $planDayIngredients;
     }
 }

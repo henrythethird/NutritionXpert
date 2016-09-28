@@ -3,6 +3,8 @@
 namespace AppBundle\Util;
 
 use AppBundle\Entity\Ingredient;
+use AppBundle\Entity\PlanDay;
+use AppBundle\Entity\PlanDayIngredient;
 use AppBundle\Entity\Recipe;
 use AppBundle\Entity\RecipeIngredient;
 
@@ -74,11 +76,29 @@ class RecipeUtil
         'zinc' => 0,
     ];
 
-    public function summarizeIngredients(array $ingredients)
+    public function summarizePlanDays(PlanDay $planDay)
+    {
+        $summarizer = self::BASE;
+        foreach ($planDay->getPlanDayIngredients() as $planDayIngredient) {
+            /** @var PlanDayIngredient $planDayIngredient */
+            $this->summarizeIngredientHelper(
+                $planDayIngredient->getAmount(),
+                $planDayIngredient->getIngredient(),
+                $summarizer
+            );
+        }
+        return $summarizer;
+    }
+
+    public function summarizeIngredients($ingredients)
     {
         $summarizer = self::BASE;
         foreach ($ingredients as $ingredient) {
-            $this->summarizeIngredientHelper(1, $ingredient, $summarizer);
+            $this->summarizeIngredientHelper(
+                100,
+                $ingredient,
+                $summarizer
+            );
         }
         return $summarizer;
     }
@@ -87,14 +107,15 @@ class RecipeUtil
      * @param array $ingredients
      * @return array
      */
-    public function summarizeRecipeIngredients(array $recipeIngredients)
+    public function summarizeRecipeIngredients($recipeIngredients)
     {
         $summarizer = self::BASE;
         foreach ($recipeIngredients as $recipeIngredient) {
-            $amount = $recipeIngredient->getAmount();
-            $ingredient = $recipeIngredient->getIngredient();
-
-            $this->summarizeIngredientHelper($amount, $ingredient, $summarizer);
+            $this->summarizeIngredientHelper(
+                $recipeIngredient->getAmount(),
+                $recipeIngredient->getIngredient(),
+                $summarizer
+            );
         }
         return $summarizer;
     }
@@ -104,8 +125,10 @@ class RecipeUtil
      * @param Ingredient $ingredient
      * @param array $summarizer
      */
-    public function summarizeIngredientHelper($amount, Ingredient $ingredient, array &$summarizer)
+    public function summarizeIngredientHelper($amount, Ingredient $ingredient, &$summarizer)
     {
+        $amount = $amount / 100.0;
+
         $summarizer['alcohol'] += $amount * $ingredient->getAlcohol();
         $summarizer['betaCarotene'] += $amount * $ingredient->getBetaCarotene();
         $summarizer['betaCaroteneActivity'] += $amount * $ingredient->getBetaCaroteneActivity();

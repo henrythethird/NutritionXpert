@@ -45,7 +45,7 @@ class PlanDayUtil
             $month = $planDay->getDate()->format('m');
             $day = $planDay->getDate()->format('d');
 
-            $concat[$year][$month][$day][] = $planDay;
+            $concat[$year][$month][$day] = $planDay;
         }
 
         $this->krsortRecursive($concat);

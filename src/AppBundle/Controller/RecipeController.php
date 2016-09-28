@@ -36,10 +36,13 @@ class RecipeController extends Controller
      */
     public function showAction(Recipe $recipe)
     {
-        $recipeUtil = new RecipeUtil($recipe);
+        $recipeUtil = new RecipeUtil();
+        $sum = $recipeUtil
+            ->summarizeRecipeIngredients($recipe->getRecipeIngredients());
+        
         return [
             'recipe' => $recipe,
-            'sum' => $recipeUtil->summarizeIngredients(),
+            'sum' => $sum,
             'dav' => RecipeUtil::DAV
         ];
     }

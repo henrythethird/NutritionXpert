@@ -21,11 +21,11 @@
                     <h3 class="text-center">{{ year }}-{{ month }}</h3>
                 </th>
             </tr>
-                    {% for day, planDayList in  monthDays %}
+                    {% for day, planDay in  monthDays %}
             <tr class="data">
                 <td>{{ day }}.{{ month }}.{{ year }}</td>
-                <td>
-                    <a class="btn btn-default" href="{{ path('plan_day', {'date': (year ~ '-' ~ month ~ '-' ~ day) }) }}">
+                <td class="text-right">
+                    <a class="btn btn-default" href="{{ path('plan_day', {'id': planDay.id }) }}">
                         Details
                     </a>
                 </td>

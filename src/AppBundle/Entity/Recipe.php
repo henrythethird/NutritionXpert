@@ -72,6 +72,14 @@ class Recipe extends Ingredient
     }
 
     /**
+     * @param int $servings
+     */
+    public function setServings($servings)
+    {
+        $this->servings = $servings;
+    }
+
+    /**
      * @Mapping\PreFlush()
      */
     public function preFlush()
