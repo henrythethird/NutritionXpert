@@ -1,6 +1,8 @@
 NutritionXpert
 ==============
 
+This is no longer maintained. Was just a trial project. Moved to: [here](https://github.com/henrythethird/nutritionist)
+
 NutritionXpert allows you to create a menu plan for a specified time 
 period. It gives you the necessary tools to manage your diet and monitor 
 your intake.
